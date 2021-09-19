@@ -1,0 +1,22 @@
+---
+
+- name: Backup Container {{ item.container_name }}
+  block:
+
+    - name: Get Container Information for {{ item.container_name }}
+      docker_container_info:
+        name: "{{ item.container_name }}"
+      register: container_info
+      become: true
+
+    - name: Backup Volumes of Container {{ item.container_name }}
+      shell: "docker run --rm --volumes-from {{ item.container_name }} -v {{ backup_location }}:/backup busybox tar cvfz /backup/{{ ansible_date_time.iso8601_basic_short }}_backup_{{ item.container_name }}_{{ container_mount.Name }}.tar {{ container_mount.Destination }}"
+      become: true
+      when: 'container_mount.Type == "volume"'
+      loop: "{{ container_info.container.Mounts }}"
+      loop_control:
+        loop_var: container_mount
+
+  rescue:
+    - debug:
+        msg: "There was an Error during Backup of the Docker Container {{ item.container_name }}. Maybe you misspelled the Container Name?" 
