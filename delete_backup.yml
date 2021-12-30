@@ -1,0 +1,16 @@
+---
+
+- name: Gather Backup Files older than {{ backup_retention }} days
+  find:
+    paths: "{{ backup_location }}"
+    age: "{{ backup_retention }}d"
+    patterns: "*_backup_*.tar.gz"
+  register: backup_files_to_delete
+  become: true
+
+- name: Delete Backup Files
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ backup_files_to_delete.files }}"
+  become: true
