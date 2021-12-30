@@ -6,17 +6,17 @@ This Playbook enables Backups all persistent Volumes (no Bind Mounts) from a giv
 Requirements
 ------------
 
-- Ansible 2.8
+- Ansible 2.10
 
 Playbook Variables
 --------------
 
 - backup_location (Default /docker/backup): Defines the Backup Location of the Volumes.
-- container_list: A Dictionary of Containers you want to backup. (Must be the same Name than in Docker). 
+- container_list_to_backup: A Dictionary of Containers you want to backup. (Must be the same Name than in Docker). 
 
   Example Container List:
 
-      container_list:
+      container_list_to_backup:
       - container_name: myShinyContainer1
       - container_name: myShinyContainer2
 
@@ -29,7 +29,7 @@ An example Playbook Call looks like this. Ofcourse you may want to specify the V
 
 Maybe you want to specify the Container Dictionary in a separate File. Then you can call the Playbook like so:
 
-    - ansible-playbook -i hosts -e "@container_list_to_backup.yml" -e "HOSTS=myDockerHost" docker_backup.yml
+    - ansible-playbook -i hosts -e "@container_list_to_backup_to_backup.yml" -e "HOSTS=myDockerHost" docker_backup.yml
 
 Author Information
 ------------------

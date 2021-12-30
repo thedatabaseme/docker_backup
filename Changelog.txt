@@ -1,0 +1,9 @@
+Changelog of docker_backup:
+
+Version 1.1.0
+  - Added Feature for deleting old Backups
+  - Renamed Variable container_list to container_list_to_backup
+  - Ansible 2.10 is now needed because of the collection requirements
+
+Version 1.0
+  - Initial Version

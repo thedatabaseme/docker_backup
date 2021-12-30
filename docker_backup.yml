@@ -1,15 +1,21 @@
 ---
 
-# Version 1.0.0
+# Version 1.1.0
 
 - hosts: "{{ HOSTS | default('all') }}"
   vars:
     backup_location: "/docker/backup/"
-    container_list:
+    backup_retention: 14
+    delete_old_backups: true
+    container_list_to_backup:
       - container_name: myShinyContainer1
       - container_name: myShinyContainer2
 
   tasks:
     - name: Backup Container
       include_tasks: do_backup.yml
-      loop: "{{ container_list }}"
+      loop: "{{ container_list_to_backup }}"
+
+    - name: Delete Backup older than {{ backup_retention }} days
+      include_tasks: delete_backup.yml
+      when: delete_old_backups
