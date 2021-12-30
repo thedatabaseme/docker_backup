@@ -11,14 +11,17 @@ Requirements
 Playbook Variables
 --------------
 
-- backup_location (Default /docker/backup): Defines the Backup Location of the Volumes.
-- container_list_to_backup: A Dictionary of Containers you want to backup. (Must be the same Name than in Docker). 
+- `backup_location` (Default `/docker/backup`): Defines the Backup Location of the Volumes.
+- `container_list_to_backup`: A Dictionary of Containers you want to backup. (Must be the same Name than in Docker). 
 
   Example Container List:
 
       container_list_to_backup:
       - container_name: myShinyContainer1
       - container_name: myShinyContainer2
+
+- `delete_old_backups` (Default `true`): Controls if you want to delete old backups or not
+- `backup_retention`: Number of days for backups you want to get preserved. Older Backups will get deleted
 
 Example Playbook run Command
 ----------------
