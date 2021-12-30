@@ -32,7 +32,7 @@ An example Playbook Call looks like this. Ofcourse you may want to specify the V
 
 Maybe you want to specify the Container Dictionary in a separate File. Then you can call the Playbook like so:
 
-    - ansible-playbook -i hosts -e "@container_list_to_backup_to_backup.yml" -e "HOSTS=myDockerHost" docker_backup.yml
+    - ansible-playbook -i hosts -e "@container_list_to_backup.yml" -e "HOSTS=myDockerHost" docker_backup.yml
 
 Author Information
 ------------------
