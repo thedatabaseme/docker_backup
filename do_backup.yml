@@ -4,7 +4,7 @@
   block:
 
     - name: "Get Container Information for {{ item.container_name }}"
-      community.general.docker_container_info:
+      community.docker.docker_container_info:
         name: "{{ item.container_name }}"
       register: container_info
       become: true
