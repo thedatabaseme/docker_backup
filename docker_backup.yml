@@ -2,7 +2,8 @@
 
 # Version 1.1.0
 
-- hosts: "{{ HOSTS | default('all') }}"
+- name: Docker backup
+  hosts: "{{ HOSTS | default('all') }}"
   vars:
     backup_location: "/docker/backup/"
     backup_retention: 14
@@ -13,9 +14,9 @@
 
   tasks:
     - name: Backup Container
-      include_tasks: do_backup.yml
+      ansible.builtin.include_tasks: do_backup.yml
       loop: "{{ container_list_to_backup }}"
 
-    - name: Delete Backup older than {{ backup_retention }} days
-      include_tasks: delete_backup.yml
+    - name: "Delete Backup older than {{ backup_retention }}"
+      ansible.builtin.include_tasks: delete_backup.yml
       when: delete_old_backups
