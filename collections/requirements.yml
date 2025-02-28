@@ -3,4 +3,4 @@ collections:
   # source
   ## https://github.com/ansible-collections/kubernetes.core/releases
   - name: community.docker
-    version: 3.4.3
+    version: 4.4.0
